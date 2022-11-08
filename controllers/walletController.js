@@ -1,13 +1,14 @@
 const { PrivateKey } = require("bitcore-lib");
 const { mainnet, testnet } = require("bitcore-lib/lib/networks");
-
 const Mnemonic = require("bitcore-mnemonic");
-const { get } = require("../routes");
+const fs = require("fs");
+const { createWalletFile } = require("../middleware/walletMiddleware.js");
 
-// const fs = require("fs");
-// const walletData = fs.readFileSync("../data/wallet.json");
-// console.log("www" + walletData);
-const walletData = [];
+createWalletFile();
+const walletData = fs.readFileSync(__dirname + "/../data/wallet.json");
+// let wallets = JSON.parse(JSON.stringify(walletData));
+
+console.log(walletData.length);
 
 const network = testnet;
 
@@ -20,10 +21,13 @@ const network = testnet;
 //   res.json(wallet);
 // };
 const getWallets = (req, res, next) => {
-  res.json(walletData);
+  let wallets = JSON.parse(walletData);
+  console.log(wallets);
+  res.json(wallets);
 };
 
 const createWallet = (req, res, next) => {
+  let wallets = JSON.parse(JSON.stringify(walletData));
   var privateKey = new PrivateKey();
   var address = privateKey.toAddress(network);
   const newWallet = {
@@ -31,8 +35,19 @@ const createWallet = (req, res, next) => {
     privateKey: privateKey.toString(),
     address: address.toString(),
   };
-  console.log(walletData);
-  walletData.push(newWallet);
+  if (walletData.length == 0) {
+    fs.writeFileSync(
+      __dirname + "/../data/wallet.json",
+      JSON.stringify([newWallet])
+    );
+  } else {
+    // const wallet = JSON.parse(walletData.toString());
+    // wallet.push(newWallet);
+    fs.writeFileSync(
+      __dirname + "/../data/wallet.json",
+      JSON.stringify(newWallet)
+    );
+  }
   console.log("new" + walletData);
   res.json(newWallet);
 };

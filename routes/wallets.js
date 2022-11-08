@@ -6,8 +6,10 @@ const {
   createWallet,
 } = require("../controllers/walletController.js");
 
+const { createWalletFile } = require("../middleware/walletMiddleware.js");
+
 // router.get("/:walletID", getWallet);
-router.get("/wallets", getWallets);
+router.get("/allWallet", getWallets);
 
 router.get("/createWallet", createWallet);
 // router.get("/HDwallet", getHDWallet);
