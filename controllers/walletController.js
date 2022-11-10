@@ -83,22 +83,20 @@ const getMnemonic = (req, res, next) => {
 
 const getMnemonicCode = (selectedID) => {
   const mnemonics = loadMnemonics();
-  const id = selectedID;
+  const id = Number(selectedID);
   const mnemonic = mnemonics.find((mnemonic) => mnemonic.id === id);
   if (!mnemonic) {
     return "wallet not found";
   }
-  res.json(mnemonic);
   return mnemonic.mnemonic;
 };
 
 const createMnemonic = (req, res, next) => {
   const mnemonics = loadMnemonics();
   let mnemonicCNT = Object.keys(mnemonics).length;
-  let mnemonicCode = new Mnemonic(Mnemonic.Words.KOREAN);
-  const str = "{" + mnemonicCode.toString() + "}";
-  console.log(str);
-  console.log(JSON.parse(str));
+  const mnemonicCode = new Mnemonic(Mnemonic.Words.KOREAN);
+  let str = JSON.stringify(mnemonicCode);
+
   const newMnemonic = {
     id: mnemonicCNT + 1,
     mnemonic: mnemonicCode.toString(),
@@ -118,31 +116,43 @@ const createMnemonic = (req, res, next) => {
   res.json(newMnemonic);
 };
 
+/**
+ * url: http://localhost:3000/wallets/newHDWallet?mnemonicID=1
+ */
 const createHDWallet = (req, res, next) => {
   const HDwallets = loadHDWallets();
   let walletCNT = Object.keys(HDwallets).length;
-  let passPharse = getMnemonicCode();
-  let xpriv = passPharse.toHDPrivateKey(passPharse, network);
+  const codeID = req.query.mnemonicID;
+  const code = getMnemonicCode(codeID);
+  console.log(code);
+  let passPharse = new Mnemonic(code);
+  let xpriv = passPharse.toHDPrivateKey(passPharse.toString(), network);
+
   const newHDWallet = {
+    mnemonicID: codeID,
+    mnemonic: passPharse.toString(),
+  };
+  const newKey = {
     id: walletCNT + 1,
     xpub: xpriv.xpubkey,
     privateKey: xpriv.privateKey.toString(),
     address: xpriv.publicKey.toAddress().toString(),
-    mnemonic: passPharse.toString(),
   };
+
   if (HDwallets.length == 0) {
+    newHDWallet.keys = [newKey];
     fs.writeFileSync(
       __dirname + "/../data/HDwallet.json",
       JSON.stringify([newHDWallet])
     );
   } else {
-    HDwallets.push(newHDWallet);
+    console.log(HDwallets.mnemonicID[codeID]);
+    HDwallets.push(newKey);
     fs.writeFileSync(
       __dirname + "/../data/HDwallet.json",
       JSON.stringify(HDwallets)
     );
   }
-  console.log("new" + HDwallets);
   res.json(newHDWallet);
 };
 

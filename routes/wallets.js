@@ -23,6 +23,6 @@ router.get("/mnemonicID/:mnemonicID", getMnemonic);
 
 router.get("/newMnemonic", createMnemonic);
 
-router.get("/newHDWallet", createHDWallet);
+router.post("/newHDWallet", createHDWallet);
 
 module.exports = router;

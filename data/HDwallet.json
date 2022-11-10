@@ -1,0 +1,14 @@
+[
+  {
+    "mnemonicID": "1",
+    "mnemonic": "여건 이전 혜택 표정 휴일 한눈 석사 할아버지 연애 무엇 솔직히 상대",
+    "keys": [
+      {
+        "id": 1,
+        "xpub": "tpubD6NzVbkrYhZ4YJoA4dTXkvMY6eWoJVCMs76pPnuVfXa71Ma2QcQngx9PT6wVYiEZWRB4wNeRTqcohMGkFzieDTG5ccDvg8exfXWuni6qJaK",
+        "privateKey": "6169ac82ac12db753d1e5677007800443aa133a0e32a80db2991d11ab5073bc3",
+        "address": "mnaZfn91VPQZSrkpnHW8b6Uxgn36dFxs8x"
+      }
+    ]
+  }
+]
