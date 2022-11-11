@@ -117,36 +117,54 @@ const createMnemonic = (req, res, next) => {
 };
 
 /**
- * url: http://localhost:3000/wallets/newHDWallet?mnemonicID=1
+ * url: http://localhost:3000/wallets/newHDWallet?mnemonicID=1&index=1
  */
 const createHDWallet = (req, res, next) => {
   const HDwallets = loadHDWallets();
   let walletCNT = Object.keys(HDwallets).length;
   const codeID = req.query.mnemonicID;
+  const index = req.query.index;
   const code = getMnemonicCode(codeID);
-  console.log(code);
-  let passPharse = new Mnemonic(code);
-  let xpriv = passPharse.toHDPrivateKey(passPharse.toString(), network);
-
+  let passPhrase = new Mnemonic(code);
+  let xpriv = passPhrase.toHDPrivateKey(passPhrase.toString(), network);
+  let parent = xpriv.deriveChild("m/44'/0'/0'/0/0");
+  let child = parent.deriveChild("m/44'/0'/0'/0/" + index);
+  console.log(xpriv);
+  console.log(
+    "================================================================"
+  );
+  console.log(parent);
+  console.log(
+    "================================================================"
+  );
+  console.log(child);
   const newHDWallet = {
     mnemonicID: codeID,
-    mnemonic: passPharse.toString(),
+    mnemonic: passPhrase.toString(),
+  };
+  const parentKey = {
+    id: walletCNT + 1,
+    xpub: parent.xpubkey,
+    privateKey: parent.privateKey.toString(),
+    address: parent.publicKey.toAddress().toString(),
   };
   const newKey = {
     id: walletCNT + 1,
-    xpub: xpriv.xpubkey,
-    privateKey: xpriv.privateKey.toString(),
-    address: xpriv.publicKey.toAddress().toString(),
+    xpub: child.xpubkey,
+    privateKey: child.privateKey.toString(),
+    address: child.publicKey.toAddress().toString(),
   };
 
   if (HDwallets.length == 0) {
+    newHDWallet.parentkey = [parentKey];
     newHDWallet.keys = [newKey];
     fs.writeFileSync(
       __dirname + "/../data/HDwallet.json",
       JSON.stringify([newHDWallet])
     );
   } else {
-    console.log(HDwallets.mnemonicID[codeID]);
+    // console.log(HDwallets.mnemonicID[codeID]);
+    HDwallets.push(parentKey);
     HDwallets.push(newKey);
     fs.writeFileSync(
       __dirname + "/../data/HDwallet.json",
