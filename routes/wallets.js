@@ -8,6 +8,7 @@ const {
   getMnemonics,
   getMnemonic,
   createMnemonic,
+  getHDWallets,
   createHDWallet,
 } = require("../controllers/walletController.js");
 
@@ -22,6 +23,8 @@ router.get("/allMnemonic", getMnemonics);
 router.get("/mnemonicID/:mnemonicID", getMnemonic);
 
 router.get("/newMnemonic", createMnemonic);
+
+router.get("/allHDWallet", getHDWallets);
 
 router.post("/newHDWallet", createHDWallet);
 

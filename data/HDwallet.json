@@ -1,34 +1,57 @@
-[
-  {
-    "mnemonicID": "1",
-    "mnemonic": "비로소 민간 워낙 왜냐하면 아직 만약 강사 시인 일요일 팩시밀리 출입 예선",
-    "parentkey": [
-      {
-        "id": 1,
-        "xpub": "tpubDG5rAYGXpYtkCSfvQawwZJXjvwewHyC346KkvsrRai54r3ousPpAv5X8rYmiyK6RAz9qJ9ACPDpEXGVuTkEaGzYDpUvJShyKPEhabbzqhAp",
-        "privateKey": "e9856059a1279108ff3a596b5842f1a863a2e83219ff6381539d3a89d738c9a5",
-        "address": "n1ngAn3eb6b8CFm3KLDU9ZcGcMSoAGqagR"
-      }
-    ],
-    "keys": [
-      {
-        "id": 1,
-        "xpub": "tpubDRzkYoHxW7HVcypnB5cyvp7hx7B2RaMMs8WBCn4HnzGFokEHALRwAg6PKC6eib8DL548Jd4mWVArjKFQEVQJwbCyTdEm34wTTtZGqggJZUi",
-        "privateKey": "34d2afcab5bfd6c52e864e6993bd9690c442cce2c54720929bc226d4195235c3",
-        "address": "mpSfrG3CDkTTVPbVXFPnpgPfUd51XjPQZG"
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "xpub": "tpubDG5rAYGXpYtkCSfvQawwZJXjvwewHyC346KkvsrRai54r3ousPpAv5X8rYmiyK6RAz9qJ9ACPDpEXGVuTkEaGzYDpUvJShyKPEhabbzqhAp",
-    "privateKey": "e9856059a1279108ff3a596b5842f1a863a2e83219ff6381539d3a89d738c9a5",
-    "address": "n1ngAn3eb6b8CFm3KLDU9ZcGcMSoAGqagR"
-  },
-  {
-    "id": 2,
-    "xpub": "tpubDRzkYoHxW7HVfHVqMwUqbQiAfPcjjwkhfvaZcbozyUvjSP4Zmv1WzNbTrbnTBuH5xPDYu27chk88B8JXHvvV7kQEUU4GBTZJ4zpUH8JV3tb",
-    "privateKey": "04fa158db459de0bc058f20f4bf649a4fc622867a2c31f6fcab1c14c6b396ace",
-    "address": "miAP8y5NQ9zY8wdrqjeBK51nNyfcrgpD47"
-  }
-]
+{
+  "HDwallets": [
+    {
+      "mnemonicID": "1",
+      "mnemonic": "신발 결론 생물 술병 정거장 쾌감 관계 방지 담요 공무원 과목 열심히",
+      "xprvKey": [
+        {
+          "xprvId": "xprv_1",
+          "xpub": "tpubD6NzVbkrYhZ4YkZccPrRZtZodCufAv828XmYoZMSzkhiDRTS9REhrD7v1wAfoyHyp5W8Z5mUwxDHs46XJHWNE4m8hypGfMveQTttAbJ65Kd",
+          "privateKey": "9da2ecaa2d7918a3cf2e674cfed61fa6df8c17afffbc343910032afcbc4942bf",
+          "address": "miZNAeEnBvt9mbymJYTjSfz58LobQVo65D"
+        }
+      ],
+      "keys": [
+        {
+          "childId": "childprv_0",
+          "privateKey": "772fd7d28bb1723a9a0f1c45fbe86d40b9887364cc1d594e0693437d0ec918ec",
+          "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ"
+        },
+        {
+          "childId": "childprv_1",
+          "privateKey": "578651425ce3da444189fccff2cdb34f398b55b38107bae3a2a58db544911620",
+          "address": "n1nSTh3c3MT2a5gThsoR6N87wPDKMNfMj1"
+        },
+        {
+          "childId": "childprv_2",
+          "privateKey": "a2e08ae17c9d12dc62020754242296155e146a179ae82c0dd16ede66b642feb2",
+          "address": "mz3zVS8xVodEQBGNFoh16nYewjaUyXY6TU"
+        }
+      ]
+    },
+    {
+      "mnemonicID": "2",
+      "mnemonic": "추억 기름 희곡 저곳 달걀 준비 결심 공항 불법 금액 빨래 상상",
+      "xprvKey": [
+        {
+          "xprvId": "xprv_2",
+          "xpub": "tpubD6NzVbkrYhZ4WQoDYo8b6o6bXBkeZPZxsEpShpAxcQqsSEZVs195Xna4b5gsh4mweMVRfXvDmA44EDLSsY8TQhbydtXXfx5BkSKv8wab96u",
+          "privateKey": "b6a54dd766613d5c39102fa00253bf0259fed11ad8519449ad9586b5b526d922",
+          "address": "mpeDZ3JZLoCXjZai2sPjRHfv3VhY9utZpX"
+        }
+      ],
+      "keys": [
+        {
+          "childId": "childprv_0",
+          "privateKey": "95cd0780c50aa973a8ab962816e7d9c88695b64ed49c2f7af7e8af387108b8cf",
+          "address": "mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT"
+        },
+        {
+          "childId": "childprv_1",
+          "privateKey": "d099ccf1a5f10ada98251e3fbfc4f70807aa5ef4dbc1f20a5133942909f75674",
+          "address": "mrQCDi7j669B5YGD2K7kVSeU2UMTX94wYa"
+        }
+      ]
+    }
+  ]
+}

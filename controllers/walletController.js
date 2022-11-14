@@ -62,10 +62,10 @@ const createWallet = (req, res, next) => {
 /**
  * Hierachical Determinstic wallet (HD wallet)
  */
-// const getHDWallets = (req, res, next) => {
-//   res.json(HDwallets);
-// };
 
+/**
+ * Mnemonic
+ */
 const getMnemonics = (req, res, next) => {
   const mnemonics = loadMnemonics();
   res.json(mnemonics);
@@ -117,7 +117,15 @@ const createMnemonic = (req, res, next) => {
 };
 
 /**
- * url: http://localhost:3000/wallets/newHDWallet?mnemonicID=1&index=1
+ * HDwallet
+ */
+const getHDWallets = (req, res, next) => {
+  const HDWallets = loadHDWallets();
+  res.json(HDWallets);
+};
+
+/**
+ * url: http://localhost:3000/wallets/newHDWallet?mnemonicID=1&index=0
  */
 const createHDWallet = (req, res, next) => {
   const HDwallets = loadHDWallets();
@@ -125,53 +133,49 @@ const createHDWallet = (req, res, next) => {
   const codeID = req.query.mnemonicID;
   const index = req.query.index;
   const code = getMnemonicCode(codeID);
-  let passPhrase = new Mnemonic(code);
-  let xpriv = passPhrase.toHDPrivateKey(passPhrase.toString(), network);
-  let parent = xpriv.deriveChild("m/44'/0'/0'/0/0");
-  let child = parent.deriveChild("m/44'/0'/0'/0/" + index);
-  console.log(xpriv);
-  console.log(
-    "================================================================"
-  );
-  console.log(parent);
-  console.log(
-    "================================================================"
-  );
-  console.log(child);
+  let passPhrase = Mnemonic(code);
+  let xprv = passPhrase.toHDPrivateKey(passPhrase.toString(), network);
+  // let parent = xpriv.deriveChild("m/44'/0'/0'");
+  let child = xprv.deriveChild("m/44'/0'/0'/0/" + index);
   const newHDWallet = {
     mnemonicID: codeID,
     mnemonic: passPhrase.toString(),
   };
-  const parentKey = {
-    id: walletCNT + 1,
-    xpub: parent.xpubkey,
-    privateKey: parent.privateKey.toString(),
-    address: parent.publicKey.toAddress().toString(),
+  const xprvKey = {
+    xprvId: "xprv_" + codeID,
+    xpub: xprv.xpubkey,
+    privateKey: xprv.privateKey.toString(),
+    address: xprv.publicKey.toAddress().toString(),
   };
-  const newKey = {
-    id: walletCNT + 1,
-    xpub: child.xpubkey,
+  const newChildKey = {
+    childId: "childprv_" + 0,
     privateKey: child.privateKey.toString(),
     address: child.publicKey.toAddress().toString(),
   };
 
-  if (HDwallets.length == 0) {
-    newHDWallet.parentkey = [parentKey];
-    newHDWallet.keys = [newKey];
+  const foundMnemonicID = HDwallets.HDwallets.find(
+    (i) => i.mnemonicID === codeID
+  );
+
+  if (!foundMnemonicID) {
+    newHDWallet.xprvKey = [xprvKey];
+    newHDWallet.keys = [newChildKey];
+    HDwallets.HDwallets.push(newHDWallet);
     fs.writeFileSync(
       __dirname + "/../data/HDwallet.json",
-      JSON.stringify([newHDWallet])
+      JSON.stringify(HDwallets)
     );
   } else {
-    // console.log(HDwallets.mnemonicID[codeID]);
-    HDwallets.push(parentKey);
-    HDwallets.push(newKey);
+    newChildKey.childId = "childprv_" + foundMnemonicID.keys.length;
+    foundMnemonicID.keys.push(newChildKey);
+
     fs.writeFileSync(
       __dirname + "/../data/HDwallet.json",
       JSON.stringify(HDwallets)
     );
   }
-  res.json(newHDWallet);
+
+  res.json(newChildKey);
 };
 
 module.exports = {
@@ -181,5 +185,6 @@ module.exports = {
   getMnemonics: getMnemonics,
   getMnemonic: getMnemonic,
   createMnemonic: createMnemonic,
+  getHDWallets: getHDWallets,
   createHDWallet: createHDWallet,
 };

@@ -9,7 +9,13 @@ const createWalletFile = (req, res, next) => {
 
 const createHDWalletFile = (req, res, next) => {
   if (!fs.existsSync(__dirname + "/../data/HDwallet.json")) {
-    fs.closeSync(fs.openSync(__dirname + "/../data/HDwallet.json", "w"));
+    fs.closeSync(
+      fs.openSync(__dirname + "/../data/HDwallet.json", "w"),
+      fs.writeFileSync(
+        __dirname + "/../data/HDwallet.json",
+        JSON.stringify({ HDwallets: [] })
+      )
+    );
   }
 };
 
