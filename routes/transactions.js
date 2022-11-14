@@ -1,9 +1,14 @@
 var express = require("express");
 var router = express.Router();
 
-const { sendBitcoin } = require("../controllers/transactionController.js");
+const {
+  sendBitcoin,
+  getBalance,
+} = require("../controllers/transactionController.js");
 
 router.post("/sendBitcoin", sendBitcoin);
+
+router.get("/getUtxo", getBalance);
 
 module.exports = router;
 
