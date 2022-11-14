@@ -1,0 +1,56 @@
+{
+  "transactions": [
+    {
+      "txid": "ca6a6beb3616df136f22b5207fa5d33c227397c2a758cc7a6d52a4328003d187",
+      "value": 20000,
+      "fees": 18040,
+      "in": [
+        { "inputCnt": 3, "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ" }
+      ],
+      "out": [
+        { "outputCnt": 2, "address": "mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT" }
+      ]
+    },
+    {
+      "txid": "60faa87817ae00967eacd0289589509eb74b02075a317a36fc975d28965901a1",
+      "value": 10000,
+      "fees": 7538.666666666667,
+      "in": [
+        {
+          "satoshis": 1923315,
+          "script": "76a9140b5753709d4d257534d91bfd1219a8773f84336488ac",
+          "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ",
+          "txId": "ca6a6beb3616df136f22b5207fa5d33c227397c2a758cc7a6d52a4328003d187",
+          "outputIndex": 1
+        }
+      ],
+      "out": [
+        { "outputCnt": 2, "address": "mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT" }
+      ]
+    },
+    {
+      "txid": "5f3c22ff3c7ba85e9418baecfa50fcd8211e8c91403ffb634041fcd407a9beca",
+      "value": 5000,
+      "fees": 12789.333333333334,
+      "in": [
+        {
+          "satoshis": 1905776,
+          "script": "76a9140b5753709d4d257534d91bfd1219a8773f84336488ac",
+          "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ",
+          "txId": "60faa87817ae00967eacd0289589509eb74b02075a317a36fc975d28965901a1",
+          "outputIndex": 1
+        },
+        {
+          "satoshis": 10000,
+          "script": "76a9140b5753709d4d257534d91bfd1219a8773f84336488ac",
+          "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ",
+          "txId": "30d4de4f6d57c8721a8b5f8c408812ebd5ccaf39277cd071cd291a85303e4bac",
+          "outputIndex": 0
+        }
+      ],
+      "out": [
+        { "outputCnt": 2, "address": "mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT" }
+      ]
+    }
+  ]
+}

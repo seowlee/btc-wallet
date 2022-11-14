@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const { sendBitcoin } = require("../controllers/sendTransaction.js");
+const { sendBitcoin } = require("../controllers/transactionController.js");
 
 router.post("/sendBitcoin", sendBitcoin);
 
