@@ -3,12 +3,12 @@ var router = express.Router();
 
 const {
   sendBitcoin,
-  getBalance,
+  getUtxo,
 } = require("../controllers/transactionController.js");
 
 router.post("/sendBitcoin", sendBitcoin);
 
-router.get("/getUtxo", getBalance);
+router.get("/getUtxo", getUtxo);
 
 module.exports = router;
 

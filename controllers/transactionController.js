@@ -24,51 +24,37 @@ const sendBitcoin = async (req, res, next) => {
       amount: req.body.amountToSend,
     };
 
-    const satoshiToSend = txData.amount * 100000000;
-    let fee = 0;
-    let inputCount = 0;
-    let outputCount = 2;
+    const addrIn = await axios({
+      method: "GET",
+      url: `http://localhost:3000/tx/getUtxo?address=${txData.in}`,
+    });
 
-    const response = await axios.get(
-      `https://chain.so/api/v2/get_tx_unspent/${sochain_network}/${txData.in}`
-    );
+    const satoshiToSend = txData.amount * 100000000;
+    const totalBalancetSatoshi = addrIn.data.totalBalance * 100000000;
+    let fee = 0;
+    let inputCount = addrIn.data.utxos.length;
+    console.log(inputCount);
+    let outputCount = 2;
 
     const recommededFee = await axios.get(
       "https://bitcoinfees.earn.com/api/v1/fees/recommended"
     );
 
     const transaction = new bitcore.Transaction();
-    let totalAmountAvailable = 0;
-
-    let inputs = [];
-    let utxos = response.data.data.txs;
-
-    for (const element of utxos) {
-      let utxo = {};
-      const satoshis = Math.floor(Number(element.value) * 100000000);
-      utxo.btc = Number(element.value);
-      utxo.satoshis = Math.floor(Number(element.value) * 100000000);
-      utxo.script = element.script_hex;
-      utxo.address = response.data.data.address;
-      utxo.txId = element.txid;
-      utxo.outputIndex = element.output_no;
-      totalAmountAvailable += satoshis;
-      inputCount += 1;
-      inputs.push(utxo);
-    }
 
     const transactionSize =
       inputCount * 180 + outputCount * 34 + 10 - inputCount;
 
     fee = (transactionSize * recommededFee.data.hourFee) / 3;
+    let btcFee = fee / 100000000;
 
     // Balance check
-    if (totalAmountAvailable - satoshiToSend - fee < 0) {
+    if (totalBalancetSatoshi - satoshiToSend - fee < 0) {
       throw new Error("Balance is too low for this transaction");
     }
 
     // Set transaction input
-    transaction.from(inputs);
+    transaction.from(addrIn.data.utxos);
 
     // Set recieverAddress and amountToSend
     transaction.to(txData.out, satoshiToSend);
@@ -98,19 +84,29 @@ const sendBitcoin = async (req, res, next) => {
 
     const newTx = {
       txid: result.data.data.txid,
-      value: satoshiToSend,
-      fees: fee,
+      value: txData.amount,
+      fees: Math.floor(btcFee * 100000000) / 100000000,
     };
-    const input = {
-      inputCnt: inputCount,
-      address: txData.in,
-    };
+
     const output = {
-      outputCnt: outputCount,
+      outId: 0,
+      value: txData.amount,
       address: txData.out,
     };
-    newTx.in = inputs;
-    newTx.out = [output];
+    const totalOutput =
+      Math.floor((addrIn.data.totalBalance - btcFee) * 100000000) / 100000000;
+    const output1Value =
+      Math.floor(
+        (addrIn.data.totalBalance - txData.amount - btcFee) * 100000000
+      ) / 100000000;
+    const output1 = {
+      outId: 1,
+      value: output1Value,
+      address: txData.in,
+    };
+
+    newTx.vin = addrIn.data;
+    newTx.vout = { totalOutput: totalOutput, output, output1 };
     allTx.transactions.push(newTx);
     fs.writeFileSync(
       __dirname + "/../data/transaction.json",
@@ -125,7 +121,7 @@ const sendBitcoin = async (req, res, next) => {
 /**
  * url: http://localhost:3000/tx/getUtxo?address=mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ
  */
-const getBalance = async (req, res, next) => {
+const getUtxo = async (req, res, next) => {
   const sochain_network = "BTCTEST";
   const response = await axios.get(
     `https://chain.so/api/v2/get_tx_unspent/${sochain_network}/${req.query.address}`
@@ -136,29 +132,31 @@ const getBalance = async (req, res, next) => {
   let inputs = [];
   let utxos = response.data.data.txs;
   let addr = response.data.data.address;
-  console.log(utxos);
+  let inputCount = 0;
+  // console.log(utxos);
 
   for (const element of utxos) {
     let utxo = {};
 
-    const satoshis = Math.floor(Number(element.value) * 100000000);
     utxo.btc = Number(element.value);
     utxo.satoshis = Math.floor(Number(element.value) * 100000000);
     utxo.script = element.script_hex;
     utxo.txId = element.txid;
     utxo.outputIndex = element.output_no;
-    totalAmountAvailable += satoshis;
+    totalAmountAvailable += utxo.btc;
+    inputCount += 1;
     inputs.push(utxo);
   }
 
   const Utxo = {
     address: addr,
-    totalAmount: totalAmountAvailable,
+    totalBalance: totalAmountAvailable,
+    utxoCnt: inputCount,
   };
   Utxo.utxos = inputs;
   res.json(Utxo);
 };
 module.exports = {
   sendBitcoin: sendBitcoin,
-  getBalance: getBalance,
+  getUtxo: getUtxo,
 };

@@ -104,6 +104,251 @@
       "out": [
         { "outputCnt": 2, "address": "mpeDZ3JZLoCXjZai2sPjRHfv3VhY9utZpX" }
       ]
+    },
+    {
+      "txid": "2dae4113a7bae498372183a95c1f9f8c5c48ac21e1043b9f7fe8aa97ad830e9e",
+      "value": 40000,
+      "fees": 7538.666666666667,
+      "in": [
+        {
+          "btc": 0.0174258,
+          "satoshis": 1742580,
+          "script": "76a9140b5753709d4d257534d91bfd1219a8773f84336488ac",
+          "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ",
+          "txId": "8b36d9c269c8d07e3b5639333b340354b4aec6a12d94f540f46ea5aa575b939d",
+          "outputIndex": 1
+        }
+      ],
+      "out": [
+        { "outputCnt": 2, "address": "mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT" }
+      ]
+    },
+    {
+      "txid": "3822e9513ba6baca69d90db78e6ab39e2a8092485c0b6953c1d5bfa633952b68",
+      "value": 50000,
+      "fees": 7538.666666666667,
+      "vin": {
+        "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ",
+        "totalAmount": 1695041,
+        "utxoCnt": 1,
+        "utxos": [
+          {
+            "btc": 0.01695041,
+            "satoshis": 1695041,
+            "script": "76a9140b5753709d4d257534d91bfd1219a8773f84336488ac",
+            "txId": "2dae4113a7bae498372183a95c1f9f8c5c48ac21e1043b9f7fe8aa97ad830e9e",
+            "outputIndex": 1
+          }
+        ]
+      },
+      "vout": [
+        {
+          "outId": 0,
+          "value": 0.0005,
+          "address": "mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT"
+        },
+        {
+          "outId": 1,
+          "value": 0.0005,
+          "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ"
+        }
+      ]
+    },
+    {
+      "txid": "5e06e2868dbad2fc0aa7859bb66421156b0053d40b04815922c95dee88f768e0",
+      "value": 40000,
+      "fees": 7538.666666666667,
+      "vin": {
+        "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ",
+        "totalAmount": 1637502,
+        "utxoCnt": 1,
+        "utxos": [
+          {
+            "btc": 0.01637502,
+            "satoshis": 1637502,
+            "script": "76a9140b5753709d4d257534d91bfd1219a8773f84336488ac",
+            "txId": "3822e9513ba6baca69d90db78e6ab39e2a8092485c0b6953c1d5bfa633952b68",
+            "outputIndex": 1
+          }
+        ]
+      },
+      "vout": [
+        {
+          "outId": 0,
+          "value": 0.0004,
+          "address": "mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT"
+        },
+        {
+          "outId": 1,
+          "value": 1629963.3329333332,
+          "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ"
+        }
+      ]
+    },
+    {
+      "txid": "d9e40eeddcf74885a3a29e6189a5e82c1b420a3cd7a6c9f9e8a7e9b50071f6a2",
+      "value": 0.0004,
+      "fees": 7538.666666666667,
+      "vin": {
+        "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ",
+        "totalAmount": 0.01589963,
+        "utxoCnt": 1,
+        "utxos": [
+          {
+            "btc": 0.01589963,
+            "satoshis": 1589963,
+            "script": "76a9140b5753709d4d257534d91bfd1219a8773f84336488ac",
+            "txId": "5e06e2868dbad2fc0aa7859bb66421156b0053d40b04815922c95dee88f768e0",
+            "outputIndex": 1
+          }
+        ]
+      },
+      "vout": [
+        {
+          "outId": 0,
+          "value": 0.0004,
+          "address": "mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT"
+        },
+        {
+          "outId": 1,
+          "value": -753866666666.6512,
+          "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ"
+        }
+      ]
+    },
+    {
+      "txid": "9b230f1b4e6483a91751743ec11ccacdc7596213fbcdf572ae0873fe2a9facd5",
+      "value": 0.0004,
+      "fees": 7538.666666666667,
+      "vin": {
+        "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ",
+        "totalBalance": 0.01542424,
+        "utxoCnt": 1,
+        "utxos": [
+          {
+            "btc": 0.01542424,
+            "satoshis": 1542424,
+            "script": "76a9140b5753709d4d257534d91bfd1219a8773f84336488ac",
+            "txId": "d9e40eeddcf74885a3a29e6189a5e82c1b420a3cd7a6c9f9e8a7e9b50071f6a2",
+            "outputIndex": 1
+          }
+        ]
+      },
+      "vout": [
+        {
+          "outId": 0,
+          "value": 0.0004,
+          "address": "mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT"
+        },
+        {
+          "outId": 1,
+          "value": 0.01494885,
+          "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ"
+        }
+      ]
+    },
+    {
+      "txid": "94b27f3064bb8f034c2f8ceb1806641b7fac959201d8a89da310e8c87628003f",
+      "value": 0.0004,
+      "fees": 0.00007538,
+      "vin": {
+        "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ",
+        "totalAmount": 0.01494885,
+        "utxoCnt": 1,
+        "utxos": [
+          {
+            "btc": 0.01494885,
+            "satoshis": 1494885,
+            "script": "76a9140b5753709d4d257534d91bfd1219a8773f84336488ac",
+            "txId": "9b230f1b4e6483a91751743ec11ccacdc7596213fbcdf572ae0873fe2a9facd5",
+            "outputIndex": 1
+          }
+        ]
+      },
+      "vout": {
+        "totalOutput": null,
+        "output": {
+          "outId": 0,
+          "value": 0.0004,
+          "address": "mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT"
+        },
+        "output1": {
+          "outId": 1,
+          "value": null,
+          "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ"
+        }
+      }
+    },
+    {
+      "txid": "6dc5e1bad79a4fb06422b737b126cd72e498fbcd53343e648f7816b1cf0705b1",
+      "value": 0.00035,
+      "fees": 0.00007538,
+      "vin": {
+        "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ",
+        "totalBalance": 0.01447346,
+        "utxoCnt": 1,
+        "utxos": [
+          {
+            "btc": 0.01447346,
+            "satoshis": 1447346,
+            "script": "76a9140b5753709d4d257534d91bfd1219a8773f84336488ac",
+            "txId": "94b27f3064bb8f034c2f8ceb1806641b7fac959201d8a89da310e8c87628003f",
+            "outputIndex": 1
+          }
+        ]
+      },
+      "vout": {
+        "totalOutput": 0.01439807,
+        "output": {
+          "outId": 0,
+          "value": 0.00035,
+          "address": "mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT"
+        },
+        "output1": {
+          "outId": 1,
+          "value": 0.01404807,
+          "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ"
+        }
+      }
+    },
+    {
+      "txid": "7899e47b7718a95466c99ba8604c73506a4b45c8ba12f2c49ae8d960aa2fd2b7",
+      "value": 0.0005,
+      "fees": 0.00012789,
+      "vin": {
+        "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ",
+        "totalBalance": 0.014148069999999999,
+        "utxoCnt": 2,
+        "utxos": [
+          {
+            "btc": 0.01404807,
+            "satoshis": 1404807,
+            "script": "76a9140b5753709d4d257534d91bfd1219a8773f84336488ac",
+            "txId": "6dc5e1bad79a4fb06422b737b126cd72e498fbcd53343e648f7816b1cf0705b1",
+            "outputIndex": 1
+          },
+          {
+            "btc": 0.0001,
+            "satoshis": 10000,
+            "script": "76a9140b5753709d4d257534d91bfd1219a8773f84336488ac",
+            "txId": "cdee5d1b333fbfe212918db43cd0ab81682b2c3563f93d22f525a466dcbcd982",
+            "outputIndex": 1
+          }
+        ]
+      },
+      "vout": {
+        "totalOutput": 0.01402017,
+        "output": {
+          "outId": 0,
+          "value": 0.0005,
+          "address": "mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT"
+        },
+        "output1": {
+          "outId": 1,
+          "value": 0.01352017,
+          "address": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ"
+        }
+      }
     }
   ]
 }
