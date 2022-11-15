@@ -91,6 +91,9 @@ const getMnemonicCode = (selectedID) => {
   return mnemonic.mnemonic;
 };
 
+/**
+ * http://localhost:3000/wallets/newMnemonic
+ */
 const createMnemonic = (req, res, next) => {
   const mnemonics = loadMnemonics();
   let mnemonicCNT = Object.keys(mnemonics).length;

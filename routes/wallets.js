@@ -22,7 +22,7 @@ router.get("/allMnemonic", getMnemonics);
 
 router.get("/mnemonicID/:mnemonicID", getMnemonic);
 
-router.get("/newMnemonic", createMnemonic);
+router.post("/newMnemonic", createMnemonic);
 
 router.get("/allHDWallet", getHDWallets);
 

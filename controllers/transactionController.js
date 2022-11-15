@@ -9,6 +9,15 @@ const {
 
 createTransactionFile();
 
+/**
+ * http://localhost:3000/tx/sendBitcoin
+ * {
+    "privateKey": "772fd7d28bb1723a9a0f1c45fbe86d40b9887364cc1d594e0693437d0ec918ec",
+    "sourceAddress": "mgYvLgCTbqWbUzdFfjPb4ftVub2DQaevuQ",
+    "recieverAddress":"mySmA9jxHR7AnVvVudcTPcpfYTJxCaSLFT",
+    "amountToSend": 0.0005
+}
+ */
 const sendBitcoin = async (req, res, next) => {
   try {
     const allTx = loadTransaction();
@@ -86,6 +95,7 @@ const sendBitcoin = async (req, res, next) => {
       txid: result.data.data.txid,
       value: txData.amount,
       fees: Math.floor(btcFee * 100000000) / 100000000,
+      time: new Date(),
     };
 
     const output = {
