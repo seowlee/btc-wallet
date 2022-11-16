@@ -2,6 +2,7 @@ const { PrivateKey } = require("bitcore-lib");
 const { mainnet, testnet } = require("bitcore-lib/lib/networks");
 const Mnemonic = require("bitcore-mnemonic");
 const fs = require("fs");
+const axios = require("axios");
 const {
   createWalletFile,
   createHDWalletFile,
@@ -78,7 +79,7 @@ const getMnemonic = (req, res, next) => {
   if (!mnemonic) {
     return res.status(404).send("wallet not found");
   }
-  res.json(mnemonic.mnemonic);
+  res.json(mnemonic);
 };
 
 const getMnemonicCode = (selectedID) => {
@@ -130,13 +131,17 @@ const getHDWallets = (req, res, next) => {
 /**
  * url: http://localhost:3000/wallets/newHDWallet?mnemonicID=1&index=0
  */
-const createHDWallet = (req, res, next) => {
+const createHDWallet = async (req, res, next) => {
   const HDwallets = loadHDWallets();
   let walletCNT = Object.keys(HDwallets).length;
   const codeID = req.query.mnemonicID;
   const index = req.query.index;
-  const code = getMnemonicCode(codeID);
-  let passPhrase = Mnemonic(code);
+  // const code = getMnemonicCode(codeID);
+  const code = await axios({
+    method: "GET",
+    url: `http://localhost:3000/wallets/mnemonicID/${codeID}`,
+  });
+  let passPhrase = Mnemonic(code.data.mnemonic);
   let xprv = passPhrase.toHDPrivateKey(passPhrase.toString(), network);
   // let parent = xpriv.deriveChild("m/44'/0'/0'");
   let child = xprv.deriveChild("m/44'/0'/0'/0/" + index);
